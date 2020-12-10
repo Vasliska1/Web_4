@@ -68,7 +68,7 @@
             }
         },
         methods: {
- 
+
 
             setR: function () {
                 this.$emit('r', this.form.r_value);

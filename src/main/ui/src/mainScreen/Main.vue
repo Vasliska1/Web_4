@@ -2,7 +2,7 @@
     <div id="main" class="d-flex flex-column">
 
         <Container/>
-        <router-link to="/">start</router-link>
+        <router-link to="/">Выйти</router-link>
 
     </div>
 </template>
