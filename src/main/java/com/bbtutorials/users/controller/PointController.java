@@ -40,7 +40,7 @@ public class PointController {
 
     @PostMapping(path = "/api/addPoint")
     public ResponseEntity<?> addPoint(@RequestBody Point point) {
-        point.setResult(true);
+        point.setResult(point.check());
         pointService.savePoint(point);
         return ResponseEntity.ok("ok");
     }

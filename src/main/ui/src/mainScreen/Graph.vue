@@ -5,43 +5,44 @@
 
             <svg ref="svg" xmlns="http://www.w3.org/2000/svg"
                  @click="handClick"
-                 width="500" height="500" id="graph" class="svg-graph">
+                 width="400" height="400" id="graph" class="svg-graph">
 
-                <polygon class="przamoyg" id="pr2" points="200,250 300,250 300,200, 200,200"
-                         fill="red" stroke="red"></polygon>
+                <polygon class="przamoyg" id="pr2" points="150,250 250,250 250,300, 150,300"
+                         fill="red" stroke="black"></polygon>
 
-                <polygon class="treyg" id="tr2" points="200,250 250,250 200,300"
-                         fill="red" stroke="red"></polygon>
+                <polygon class="treyg" id="tr2" points="250,250 300,250 250,150"
+                         fill="red" stroke="black"></polygon>
 
-                <g transform="translate(200 250) scale(-25,25)">
-                    <path d="M0 0 L 0 -2 A2 2 0 0 1  2  0 " fill="red" id="okr2" stroke="red"
+                <g transform="translate(250 250) scale(25,-25)">
+                    <path d="M0 0 L 0 -2 A2 2 0 0 1  2  0 " fill="red" id="okr2" stroke="black"
                           stroke-width="0.03"></path>
                 </g>
 
                 <line class="line" x1="0" x2="400" y1="250" y2="250" stroke="black"></line>
-                <line class="line" x1="200" x2="200" y1="0" y2="500" stroke="black"></line>
+                <line class="line" x1="250" x2="250" y1="0" y2="400" stroke="black"></line>
 
-                <text class="text" x="250" y="240">1</text>
-                <text class="text" x="300" y="240">2</text>
-                <text class="text" x="350" y="240">3</text>
-                <text class="text" x="390" y="240">4</text>
-                <text class="text" x="-3" y="240">-4</text>
-                <text class="text" x="40" y="240">-3</text>
-                <text class="text" x="90" y="240">-2</text>
-                <text class="text" x="140" y="240">-3</text>
-                <text class="text" x="210" y="200">1</text>
-                <text class="text" x="210" y="150">2</text>
-                <text class="text" x="210" y="100">3</text>
-                <text class="text" x="210" y="50">4</text>
-                <text class="text" x="210" y="12">5</text>
-                <text class="text" x="210" y="300">-1</text>
-                <text class="text" x="210" y="350">-2</text>
-                <text class="text" x="210" y="400">-3</text>
-                <text class="text" x="210" y="450">-4</text>
-                <text class="text" x="210" y="495">-5</text>
+                <text class="text" x="250" y="240">-1</text>
+                <text class="text" x="300" y="240">1</text>
+                <text class="text" x="350" y="240">2</text>
+                <text class="text" x="390" y="240">3</text>
+                <text class="text" x="-3" y="240">-5</text>
+                <text class="text" x="40" y="240">-4</text>
+                <text class="text" x="90" y="240">-3</text>
+                <text class="text" x="140" y="240">-2</text>
+
                 <text class="text" x="390" y="220">X</text>
-                <text class="text" x="235" y="13">Y</text>
+                <text class="text" x="255" y="13">Y</text>
 
+                <text class="text" x="220" y="200">1</text>
+                <text class="text" x="220" y="150">2</text>
+                <text class="text" x="220" y="100">3</text>
+                <text class="text" x="220" y="50">4</text>
+                <text class="text" x="220" y="12">5</text>
+                <text class="text" x="220" y="300">-1</text>
+                <text class="text" x="220" y="350">-2</text>
+                <text class="text" x="220" y="400">-3</text>
+                <text class="text" x="220" y="450">-4</text>
+                <text class="text" x="220" y="495">-5</text>
                 <g class="pointPlace">
                     <circle v-for="point in points" v-bind:key="point"
                             :cx="getX(point.x,point.r)"
