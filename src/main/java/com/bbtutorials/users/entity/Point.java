@@ -54,9 +54,9 @@ public class Point extends BaseEntity {
     }
 
     public Boolean check() {
-        if ((x * x + y * y <= r / 2 * r / 2 && x <= 0 && y >= 0) ||
-                (y >= x - r / 2 && x >= 0 && y <= 0) ||
-                (y <= r / 2 && x >= 0 && x <= r && y >= 0)) {
+        if ((x * x + y * y <= r / 2 * r / 2 && x <= 0 && y <= 0) ||
+                (y <= -2*x + r  && x >= 0 && y >= 0) ||
+                (y <= 0  && x <= 0 && x >= -r && y >= -r/2)) {
             return true;
         } else {
             return false;

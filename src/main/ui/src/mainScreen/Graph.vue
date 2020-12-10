@@ -45,12 +45,12 @@
                 <text class="text" x="220" y="495">-5</text>
                 <g class="pointPlace">
                     <circle v-for="point in points" v-bind:key="point"
-                            :cx="getX(point.x,point.r)"
-                            :cy="getY(point.y,point.r)"
+                            :cx="getX(point.x)"
+                            :cy="getY(point.y)"
                             :fill="hit(point.result)"
                             r="3">
                     </circle>
-                    <circle :cx="getX(x_value, r[0])" :cy="getY(y_value,r[0])" r="3"></circle>
+                    <circle :cx="getX(x_value)" :cy="getY(y_value)" r="3"></circle>
                 </g>
             </svg>
 
@@ -78,11 +78,11 @@
         },
 
         methods: {
-            getX: function (x, r) {
-                return 250 + x / r * 200;
+            getX: function (x) {
+                return 250 + x*100/2 ;
             },
-            getY: function (y, r) {
-                return 250 - y / r * 200;
+            getY: function (y) {
+                return 250 - y * 100/2;
             },
             hit: function (hit) {
                 return hit ? "green" : "red";
@@ -96,8 +96,8 @@
                 pt.x = event.clientX;
                 pt.y = event.clientY;
                 let gp = pt.matrixTransform(svg.getScreenCTM().inverse())
-                this.x_value = (gp.x - 250) / 200 * this.r[0];
-                this.y_value = (gp.y - 250) / (-200) * this.r[0];
+                this.x_value = (gp.x - 250) * 2/100;
+                this.y_value = -(gp.y - 250) *2/100 ;
 
             },
 
