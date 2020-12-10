@@ -68,22 +68,15 @@
             }
         },
         methods: {
-            setPointFromGraph() {
-                if (this.x.length && this.y.length) {
-                    this.form.x_value = this.x;
-                    this.form.y_value = this.y;
-                }
-            },
+ 
 
             setR: function () {
-                console.log(this.form.r_value[1] + "asds")
                 this.$emit('r', this.form.r_value);
                 this.validate_R();
             },
             validate_R: function () {
                 let count = 0
                 this.form.r_value.forEach((element) => {
-                    console.log(element + "element")
                     if (element < 0)
                         count++
                 })
