@@ -1,7 +1,6 @@
 package com.bbtutorials.users.config;
 
 import com.bbtutorials.users.filters.TokenFilter;
-import com.bbtutorials.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsService userDetailService;
 
     @Autowired
-    private TokenFilter jwtRequestFilter;
+    private TokenFilter tokenFilter;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -43,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

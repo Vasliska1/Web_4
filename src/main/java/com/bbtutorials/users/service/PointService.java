@@ -20,10 +20,6 @@ public class PointService {
         this.pointRepository = pointRepository;
     }
 
-    public List<Point> getPointData() {
-        return pointRepository.findAll();
-    }
-
     public Point savePoint(Point point) {
         return pointRepository.save(point);
     }

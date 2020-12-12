@@ -36,11 +36,9 @@ public class TokenService {
         return extractExpiration(token).before(new Date());
     }
 
-
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
 
     public String generateToken(UserDetails userDetails) {
         return createToken(userDetails.getUsername());
