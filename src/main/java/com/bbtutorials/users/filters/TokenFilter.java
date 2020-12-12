@@ -40,7 +40,6 @@ public class TokenFilter extends OncePerRequestFilter {
             username = tokenService.extractUsername(token);
         }
 
-
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 

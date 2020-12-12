@@ -54,7 +54,7 @@ public class UserController {
     public ResponseEntity<String> register(@RequestBody @Valid User user) {
         if (userService.findByUsername(user.getUsername()) == null) {
             userService.save(user);
-            return new ResponseEntity<>("Вы зарагестрировались!!", HttpStatus.CREATED);
+            return new ResponseEntity<>("Вы зарагистрировались!! Поздравляем!!!", HttpStatus.CREATED);
         }
         return new ResponseEntity<>("Такой пользователь уже есть!!", HttpStatus.CONFLICT);
     }
