@@ -1,9 +1,11 @@
 package com.bbtutorials.users.service;
 
 import com.bbtutorials.users.entity.Point;
+import com.bbtutorials.users.entity.User;
 import com.bbtutorials.users.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -25,6 +27,8 @@ public class PointService {
     public Point savePoint(Point point) {
         return pointRepository.save(point);
     }
-
-
+    @Transactional
+    public List<Point> getPointsByUsername(User user) {
+        return pointRepository.getAllByUser(user);
+    }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center flex-grow-1 ">
-        <form class="text-center p-5 col-8 col-lg-4">
+        <div class="text-center p-5 col-8 col-lg-4">
 
             <input type="text"
                    v-model="login"
@@ -21,16 +21,18 @@
             </div>
             <button @click.prevent="authorize" class="btn btn-info btn-block my-4" id="log-in">Вход</button>
             <button @click.prevent="register" class="btn btn-info btn-block my-4" id="register">Регистрация</button>
-            <router-link v-if="authorized" to="/main">
-                <button>Main</button>
-            </router-link>
-        </form>
+            <div v-if="impInfo">
+                <strong>{{ impInfo }}</strong>
+            </div>
+
+        </div>
     </div>
 </template>
 
 <script>
 
     import {registration, login} from './ConnectServer'
+
 
     export default {
         name: "RegisterForm",
@@ -46,38 +48,45 @@
                 password: null,
                 errors: [],
                 info: '',
-                authorized: true
+                authorized: true,
+                impInfo: ''
             }
         },
         methods: {
             register: function () {
                 this.checkForm();
+
                 if (this.login && this.password) {
                     registration(this.request).then(response => {
-                        console.log(response)
 
-                        console.log(response.status);
                         if (response.ok) {
-                            this.$router.push('main');
-
+                            response.text().then(text => {
+                                this.impInfo = text;
+                            });
                         } else {
                             console.log("bad");
                             response.text().then(text => this.info = text)
-
                         }
                     })
                 }
             },
             authorize: function () {
                 this.checkForm();
+                console.log(this.request.username);
                 if (this.login && this.password) {
                     login(this.request).then((response) => {
                         if (response.ok) {
-                            this.$router.push('main')
-                        } else response.text().then(text => this.info = text);
-                    });
+                            response.text().then(text => {
+                                localStorage.setItem("auth", text);
+                                this.$router.push('main')
+                            });
+                        } else
+                            response.text().then(text => this.info = text);
+                    })
+
                 }
             },
+
 
             checkForm: function () {
                 this.errors = [];

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 
 @Entity
@@ -13,10 +14,11 @@ import java.util.Collection;
 public class User extends BaseEntity implements UserDetails {
     public User() {
     }
-
+    @NotEmpty
     @Column(name = "username", unique = true)
     private String username;
 
+    @NotEmpty
     @Column(name = "password")
     private String password;
 

@@ -1,6 +1,6 @@
 <template>
     <div class="col-5">
-        <form class="h-100  d-flex  justify-content-center flex-column">
+        <div class="h-100  d-flex  justify-content-center flex-column">
             <div id="X" class="form-check form-check-inline">
                 <div v-for="num in values" v-bind:key="num">
                     <input class="form-check-input" type="checkbox" v-bind:value="num" v-model="form.x_value">
@@ -31,7 +31,7 @@
                 <button :disabled="!valid" @click=pointCreate variant="success">Отправить</button>
             </div>
 
-        </form>
+        </div>
     </div>
 </template>
 
@@ -41,20 +41,7 @@
     export default {
         name: "myForm",
         data() {
-            return {
-                values: ['-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3'],
-                errors: {
-                    x: '',
-                    y: '',
-                    r: ''
-                },
-                form: {
-                    x_value: [],
-                    y_value: '',
-                    r_value: [],
-                },
-
-            }
+            return this.initialState();
         },
         computed: {
             valid: function () {
@@ -68,6 +55,27 @@
             }
         },
         methods: {
+
+            initialState: function () {
+
+                return {
+
+                    values: ['-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3'],
+                    errors: {
+                        x: '',
+                        y: '',
+                        r: ''
+                    },
+                    form: {
+                        x_value: [],
+                        y_value: '',
+                        r_value: [],
+                    },
+
+                }
+
+
+            },
 
 
             setR: function () {
@@ -107,13 +115,11 @@
 
                     }
                 }
-                //this.clearForm();
+                this.clearForm();
 
             },
             clearForm() {
-                this.form.x_value = [];
-                this.form.y_value = "";
-                this.form.r_value = [];
+                Object.assign(this.$data,this.initialState())
             }
         },
     }

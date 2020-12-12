@@ -4,7 +4,6 @@
             <div class="col-md-8">
                 <Form @pointCreate="pointCreate($event)"
                       @r="setR"
-
                 />
             </div>
             <Graph :r="r"
@@ -49,13 +48,13 @@
                     console.log(response);
                 });
                 this.getAllPoints();
+
             },
             setR: function (r) {
                 this.r = r;
             },
         },
         mounted() {
-            console.log(11)
             this.getAllPoints();
         }
 

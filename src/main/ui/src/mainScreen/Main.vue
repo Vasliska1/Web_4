@@ -1,9 +1,7 @@
 <template>
     <div id="main" class="d-flex flex-column">
-
+        <button @click.prevent="logOut" id="out"> Выход</button>
         <Container/>
-        <router-link to="/">Выйти</router-link>
-
     </div>
 </template>
 
@@ -14,6 +12,19 @@
         name: "Main",
         components: {
             Container
+        },
+        methods: {
+            logOut: function () {
+                localStorage.clear();
+                this.$router.push('/');
+
+            }
+        },
+        mounted() {
+            if (localStorage.getItem("auth") == null) {
+                this.$router.push('/');
+            }
+
         }
     }
 </script>

@@ -4,13 +4,16 @@ export async function registration(data) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
+
     })
+
+
     return response;
 }
 
-export async function login(data) {
+export function login(data) {
 
-    const response = await fetch(`/api/login`, {
+    const response =  fetch(`/api/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
