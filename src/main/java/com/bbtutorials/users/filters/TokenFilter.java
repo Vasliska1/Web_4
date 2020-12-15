@@ -3,6 +3,7 @@ package com.bbtutorials.users.filters;
 import com.bbtutorials.users.service.TokenService;
 import com.bbtutorials.users.service.UserDetailService;
 import com.bbtutorials.users.service.UserService;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,11 +34,13 @@ public class TokenFilter extends OncePerRequestFilter {
 
         String username = null;
         String token = null;
-
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-
-            token = authorizationHeader.substring(7);
-            username = tokenService.extractUsername(token);
+        try {
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                token = authorizationHeader.substring(7);
+                username = tokenService.extractUsername(token);
+            }
+        } catch (MalformedJwtException e) {
+            System.err.println("No access");
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
