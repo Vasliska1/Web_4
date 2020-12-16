@@ -29,8 +29,10 @@ public class PointController {
     @GetMapping(path = "/api/point")
     public ResponseEntity<?> listPoint(Principal user) {
 
+        System.out.println(005);
         List<Point> resource = pointService.getPointsByUsername(userService.findByUsername(user.getName()));
         return ResponseEntity.ok(resource);
+
     }
 
     @PostMapping(path = "/api/point")
@@ -40,7 +42,7 @@ public class PointController {
         System.out.println(user.getName());
         point.setUser(userService.findByUsername(user.getName()));
         pointService.savePoint(point);
-        return ResponseEntity.ok("ok");
+        return ResponseEntity.ok(point);
     }
 
 }
