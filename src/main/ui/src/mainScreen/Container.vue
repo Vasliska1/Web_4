@@ -1,16 +1,20 @@
 <template>
     <div class="container-fluid ">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <Form @pointCreate="pointCreate($event)"
-                      @r="setR"
-                />
-            </div>
+        <div class="basis row justify-content-center ">
+
+            <Form @pointCreate="pointCreate($event)"
+                  @r="setR"
+            />
+
+
             <Graph :r="r"
                    :points="points"
-                    @pointCreate="pointCreate($event)"/>
+                   @pointCreate="pointCreate($event)"/>
+
         </div>
-        <Table :points="points"/>
+        <div class="">
+            <Table :points="points"/>
+        </div>
     </div>
 </template>
 
@@ -46,8 +50,10 @@
                 console.log(data)
                 pointCreate(data).then(response => {
                     console.log(response);
+                    this.getAllPoints();
+                    this.r = [];
                 });
-                this.getAllPoints();
+
 
             },
             setR: function (r) {
@@ -62,7 +68,25 @@
 </script>
 
 <style scoped>
-    div {
+
+    .basis {
+        background: #fddcff;
+        color: black;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 50px;
+        padding-bottom: 80px;
+        width: auto;
+        max-width: 1140px;
+        min-width: 500px;
+        height: auto;
+        opacity: 0.8;
+        border: 3px solid #fdb6fa;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 80px;
+
 
     }
+
 </style>

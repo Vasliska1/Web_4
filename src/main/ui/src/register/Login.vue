@@ -62,6 +62,7 @@
                         if (response.ok) {
                             response.text().then(text => {
                                 this.impInfo = text;
+                                this.$root.$refs.com.setUserName(this.login);
                             });
                         } else {
                             console.log("bad");
@@ -79,6 +80,7 @@
                             response.text().then(text => {
                                 localStorage.setItem("auth", text);
                                 this.$router.push('main')
+
                             });
                         } else
                             response.text().then(text => this.info = text);

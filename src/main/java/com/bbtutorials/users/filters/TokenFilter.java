@@ -30,6 +30,7 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+        System.out.println(003);
         final String authorizationHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -56,6 +57,7 @@ public class TokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+        System.out.println(004);
     }
 
 }

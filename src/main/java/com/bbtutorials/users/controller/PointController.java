@@ -29,7 +29,6 @@ public class PointController {
     @GetMapping(path = "/api/point")
     public ResponseEntity<?> listPoint(Principal user) {
 
-        System.out.println(005);
         List<Point> resource = pointService.getPointsByUsername(userService.findByUsername(user.getName()));
         return ResponseEntity.ok(resource);
 
