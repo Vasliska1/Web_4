@@ -21,3 +21,22 @@ export async function getAllPoints() {
     return await response.json();
 
 }
+
+
+export async function check() {
+
+    const response = await fetch('/api/check',
+        {
+            method: 'GET',
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("auth")
+            }
+        });
+
+
+    console.log(response + "resp")
+    return  response;
+
+
+
+}

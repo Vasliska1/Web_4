@@ -3,8 +3,12 @@ package com.bbtutorials.users.filters;
 import com.bbtutorials.users.service.TokenService;
 import com.bbtutorials.users.service.UserDetailService;
 import com.bbtutorials.users.service.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @Component
 public class TokenFilter extends OncePerRequestFilter {
+
+    private Boolean accessTrouble = false;
 
     @Autowired
     private UserDetailService userDetailsService;
@@ -30,7 +37,7 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        System.out.println(003);
+        accessTrouble=false;
         final String authorizationHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -41,6 +48,7 @@ public class TokenFilter extends OncePerRequestFilter {
                 username = tokenService.extractUsername(token);
             }
         } catch (MalformedJwtException e) {
+            accessTrouble=true;
             System.err.println("No access");
         }
 
@@ -57,7 +65,17 @@ public class TokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
-        System.out.println(004);
+
+    }
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+        return headers;
     }
 
+
+    public Boolean getAccessTrouble() {
+        return accessTrouble;
+    }
 }

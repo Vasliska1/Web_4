@@ -14,9 +14,17 @@
 
 <script>
     import Container from "./Container.vue";
+    import {check} from './PointsFromServer'
 
     export default {
         name: "Main",
+
+
+        data() {
+            return {
+                ok: false
+            }
+        },
         components: {
             Container
         },
@@ -28,13 +36,26 @@
             },
             getName() {
                 localStorage.getItem("auth")
-            }
+            },
+            async checkTok() {
+
+                await check().then(response => {
+                        this.ok = response.ok;
+                    }
+                )
+
+            },
+
+
         },
 
-        mounted() {
-
+        async mounted() {
             if (localStorage.getItem("auth") == null) {
-                  this.$router.push('/');
+                this.$router.push('/');
+            }
+            await this.checkTok();
+            if (this.ok === false) {
+                this.$router.push('/');
             }
 
         }
